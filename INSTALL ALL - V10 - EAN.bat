@@ -24,13 +24,13 @@ echo 	3) FSECURE, installation depuis NAS 100.94
 echo 	4) Addons Mai 2023, installation depuis NAS 100.94
 echo 	5) VPN, installation depuis NAS 100.94
 echo 	6) GPUupdate force injection
-echo 	7) Lotus NOTES V9 et Patch, installation depuis NAS 100.94   									## Ne plus faire 
+echo 	7) Lotus NOTES V9 et Patch, installation depuis NAS 100.94   									REM Ne plus faire 
 echo 	8) Solidedge2D, installation depuis NAS 100.94
 echo 	9) Office 365, installation depuis NAS 100.94
 echo 	10) DESKTOPinfo 
 echo 	11) BIGFIX, installation depuis NAS 100.94
 echo 	12) SAP V10.3, installation depuis NAS 100.94
-echo 	13) Imprimantes															## Les minimas sont au dessus
+echo 	13) Imprimantes															                        REM Les minimas sont au dessus
 echo 	14) Grant ADDONS/SAP
 echo 	15) Reboot reinstal Windows 10
 echo 	16) Copie tout le dossier source sur C:\ITlmg
@@ -168,8 +168,8 @@ pause
 CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
 pause
 echo ============================================================================================================
-## echo Vous avez lancé 10															## Why 10 ?
-echo Vous avez lancé 3) FSECURE, instalaltion depuis NAS 100.94											##Modif
+REM echo Vous avez lancé 10															                    REM Why 10 ?
+echo Vous avez lancé 3) FSECURE, instalaltion depuis NAS 100.94											REM Modif
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 goto menu
 
@@ -290,7 +290,7 @@ echo on
 CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#lotusNOTES\NOTES_CLIENT_9.0.1_WIN_FR.exe"
 pause
 CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#lotusNOTES\notes901FP7_win.exe"
-Echo off																## Mettre ending 
+Echo off																                                    REM Mettre ending 
 goto menu
 
 
@@ -301,7 +301,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ok
 Echo .
 Echo .
-echo .		Vous avez lancé 8) Solid Edge ATTENTION A LA VERSION 								## mettre un choix en sélection pour better executable
+echo .		Vous avez lancé 8) Solid Edge ATTENTION A LA VERSION 								REM mettre un choix en sélection pour better executable
 echo . 					1) Solid Edge version 2D gratuite pour tout le monde 
 echo . 					2) Solid Edge version 3D sous licence LAPPMULLER
 echo . 					3) Solid Edge version Simulation
@@ -419,7 +419,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Echo .
 Echo .
-echo .		Vous avez lancé 9) DESKTOP info 											## Modif 
+echo .		Vous avez lancé 9) DESKTOP info 											REM Modif 
 Echo .
 Echo .
 echo ============================================================================================================
@@ -430,7 +430,7 @@ xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\DESKTOP\*.*
 echo ============================================================================================================
 Echo .
 Echo .
-echo .		Vous avez lancé 9) DESKTOP info												##Modif 
+echo .		Vous avez lancé 9) DESKTOP info												REM Modif 
 Echo .
 Echo .
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
@@ -444,13 +444,13 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Echo .
 Echo .
-echo .		Vous avez lancé 11) BIGFIX, installation depuis NAS 100.94								## Modif
+echo .		Vous avez lancé 11) BIGFIX, installation depuis NAS 100.94								REM Modif
 Echo .
 Echo .
 echo ============================================================================================================
 CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
 echo ============================================================================================================
-echo .		Vous avez lancé 11)  BIGFIX, installation depuis NAS 100.94								##Modif
+echo .		Vous avez lancé 11)  BIGFIX, installation depuis NAS 100.94								REM Modif
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 goto menu
 
@@ -462,7 +462,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ok
 Echo .
 Echo .
-echo .		Vous avez lancé 12) Installation SAP											## Modif
+echo .		Vous avez lancé 12) Installation SAP										        	                    REM Modif
 Echo .
 Echo .
 echo ============================================================================================================
@@ -476,7 +476,7 @@ echo ECHO Paramétres SAP LMGSAPB1H01 4000
 pause
 
 echo ============================================================================================================
-echo . 		Vous avez lancé 12) Installation SAP											##Modif
+echo . 		Vous avez lancé 12) Installation SAP											                            REM Modif
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 goto menu
 
@@ -488,7 +488,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Echo .
 Echo .
-echo .		Vous avez lancé 13) Imprimantes 											## Modif
+echo .		Vous avez lancé 13) Imprimantes 											                                REM Modif
 Echo .
 Echo .
 echo ============================================================================================================
@@ -507,7 +507,7 @@ cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\CorporateSTOT-Bol.otf
 cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\CorporateSTOT-Reg.otf
 
 echo ============================================================================================================
-echo . 		Vous avez lancé 13) Imprimantes 											##Modif
+echo . 		Vous avez lancé 13) Imprimantes 											                                REM Modif
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 goto menu
 
@@ -519,13 +519,13 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Echo .
 Echo .
-echo .		Vous avez lancé 14) Grant lecture all ADDONS/SAP									##Modif
+echo .		Vous avez lancé 14) Grant lecture all ADDONS/SAP									                        REM Modif
 Echo .
 Echo .
 echo ============================================================================================================
 iCACLS "C:\Program Files\sap\SAP Business One\AddOns" /Grant "Tout le monde":F /T 
 echo ============================================================================================================
-echo . 		Vous avez lancé 14) Grant lecture all ADDONS/SAP									##Modif
+echo . 		Vous avez lancé 14) Grant lecture all ADDONS/SAP									                        REM Modif
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 goto menu
 
@@ -537,7 +537,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Echo .
 Echo .
-echo .	Vous avez lancé 15) Reboot reinstal Windows 10											##Modif
+echo .	Vous avez lancé 15) Reboot reinstal Windows 10											                        REM Modif
 Echo .
 Echo .
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
@@ -552,7 +552,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Echo .
 Echo .
-echo .		Vous avez lancé 16) Copie tout le dossier source sur C:\ITlmg								##Modif
+echo .		Vous avez lancé 16) Copie tout le dossier source sur C:\ITlmg				                                REM Modif
 Echo .
 Echo .
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
@@ -606,7 +606,7 @@ Pause
 echo off
 echo ============================================================================================================
 Echo .
-Echo .	fin 96)  Analyses IP													 ##Modif
+Echo .	fin 96)  Analyses IP													                                        REM Modif
 Echo .
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 goto menu
