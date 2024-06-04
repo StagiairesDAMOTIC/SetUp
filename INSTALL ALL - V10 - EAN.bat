@@ -28,7 +28,7 @@ echo 	7) Lotus NOTES V9 et Patch, installation depuis NAS 100.94   									REM 
 echo 	8) Solidedge2D, installation depuis NAS 100.94
 echo 	9) Office 365, installation depuis NAS 100.94
 echo 	10) DESKTOPinfo 
-echo 	11) BIGFIX, installation depuis NAS 100.94
+echo 	11) BIGFIX, installation depuis NAS 100.94                                                      REM Ne pas faire 
 echo 	12) SAP V10.3, installation depuis NAS 100.94
 echo 	13) Imprimantes															                        REM Les minimas sont au dessus
 echo 	14) Grant ADDONS/SAP
