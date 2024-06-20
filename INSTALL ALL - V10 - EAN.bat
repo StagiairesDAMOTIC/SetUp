@@ -17,7 +17,8 @@ Echo .
 echo .		Choix installation: DAMOTIC.FR +33783765036 LMGSAPB1H01 4000 Mai 2023 V4
 Echo 		%logonserver% %USERNAME% avec %COMPUTERNAME% %HOMEPATH% sous:%OS% 
 echo ############################################################################################################
-echo 	0) WINDOWS UPDATE OS,
+echo 	00) Lire la documentation pour l'installation 
+echo 	0) WINDOWS UPDATE OS
 echo 	1) Setup, mapping, SMB1, purge temp,NetFx3
 echo 	2) Netskope, installation depuis NAS 100.94
 echo 	3) FSECURE, installation depuis NAS 100.94
@@ -45,6 +46,7 @@ echo .		Pour installer un pc avec toutes les options, faire le 99
 Echo .
 echo ############################################################################################################
 set /p op=Choix : 
+if "%op%"=="00" goto documentation
 if "%op%"=="0" goto update
 if "%op%"=="1" goto setup
 if "%op%"=="2" goto NETSKOPE
@@ -68,6 +70,22 @@ if "%op%"=="97" goto BIOS
 if "%op%"=="98" goto ADDdomain
 if "%op%"=="99" goto installCOMPLETE
 echo Quelle option:
+goto menu
+
+
+:documentation
+echo off 
+echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\      Documentation    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ok
+Echo .
+Echo .
+Echo .
+echo .              00) Lecture de la documentation
+Echo . 
+Echo . 
+Echo . 
+@echo off
+explorer https://www.overleaf.com/project/665d8b689844da415cc4ab44
+COLOR fc
 goto menu
 
 :update
@@ -159,7 +177,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ok
 Echo .
 Echo .
-echo .		3) FSECURE, installation depuis NAS 100.94 
+echo .		Vous avez lancé 3) FSECURE, installation depuis NAS 100.94                                  REM mettre dans la doc ce que c'est fsécure en détails
 Echo .
 Echo .
 echo ============================================================================================================
@@ -169,7 +187,7 @@ CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\TeamViewe
 pause
 echo ============================================================================================================
 REM echo Vous avez lancé 10															                    REM Why 10 ?
-echo Vous avez lancé 3) FSECURE, instalaltion depuis NAS 100.94											REM Modif
+echo .       Vous avez lancé 3) FSECURE, instalaltion depuis NAS 100.94									REM Modif
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 goto menu
 
@@ -307,10 +325,10 @@ echo . 					2) Solid Edge version 3D sous licence LAPPMULLER
 echo . 					3) Solid Edge version Simulation
 Echo .
 Echo .
-set /p op=Choix : 
-if "%op%"=="1" goto sedge2d
-if "%op%"=="2" goto sedge3d
-if "%op%"=="3" goto sedge3s
+set /p se=Choix : 
+if "%se%"=="1" goto sedge2d
+if "%se%"=="2" goto sedge3d
+if "%se%"=="3" goto sedge3s
 echo Quelle option:
 goto menu
 
