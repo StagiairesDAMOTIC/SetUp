@@ -10,20 +10,20 @@ set OS=%OS%
 runas /user:lappmuller\administrateur "cmd /c powercfg.exe /hibernate off"
 xcopy NAS_SERVER\#lebureau\*.* C:\user\desktop\user /Y /E
 w32tm /query /status > hours.log
-Echo %logonserver% %USERNAME% avec %COMPUTERNAME% %HOMEPATH% sous:%OS% > pc.log
+Echo LOGON_SERVER USERNAME avec COMPUTERNAME HOMEPATH sous:OS > pc.log
 pause
 
 COLOR cf
 CLS
 
-title DAMOTIC.FR V9 MARS/2024 Tél: +33(0)783765036 administrateur Lmg@Olfex$83.com LMGSAPB1H01 4000
+title DAMOTIC.FR V11 JUILLET/2024 Tél: +33(0)783765036 administrateur Lmg@Olfex$83.com LMGSAPB1H01 4000
 
 :menu
 COLOR cf
 echo ############################################################################################################
 Echo .
-echo .		Choix installation: DAMOTIC.FR +33783765036 LMGSAPB1H01 4000 Mai 2023 V4
-Echo 		%logonserver% %USERNAME% avec %COMPUTERNAME% %HOMEPATH% sous:%OS% 
+echo .		Choix installation: DAMOTIC.FR +33783765036 LMGSAPB1H01 4000 Juillet 2024 V11
+Echo 		LOGON_SERVER USERNAME avec COMPUTERNAME HOMEPATH sous:OS
 echo ############################################################################################################
 echo 	0) WINDOWS UPDATE OS
 echo 	1) Setup, mapping, SMB1, purge temp,NetFx3
