@@ -1,153 +1,179 @@
+@echo off
+set NAS_SERVER=\\192.168.100.94\it-lmg\Source\INSTALL2023
+set FONT_DIR=C:\Windows\Fonts
+set TEMP_DIR=%temp%
+set LOGON_SERVER=%logonserver%
+set USERNAME=%USERNAME%
+set COMPUTERNAME=%COMPUTERNAME%
+set HOMEPATH=%HOMEPATH%
+set OS=%OS%
 
-:installCOMPLETE
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-echo .		99) Installation de toutes les applications LAPPMULLER.LOCAL Et LAPPDOMAIN
-Echo .
-echo ============================================================================================================
+REM Disable hibernation
+runas /user:lappmuller\administrateur "cmd /c powercfg.exe /hibernate off"
 
+REM Copy desktop files
+xcopy "%NAS_SERVER%\#lebureau\*.*" "C:\Users\%USERNAME%\Desktop" /Y /E
 
+REM Log time status
+w32tm /query /status > hours.log
 
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#antivirusLMG\Fsecure\Client\fscs-15.11.1138.msi"
-Pause
+REM Log PC details
+echo %LOGON_SERVER% %USERNAME% avec %COMPUTERNAME% %HOMEPATH% sous:%OS% > pc.log
 
-CMD /K "del /q /f /s %temp%\*"
-CMD /K "del /s /q C:\windows\temp\*
+REM Windows Update
+wuauclt.exe /updatenow
 
+REM Setup, mapping, SMB1, purge temp, NetFx3
+CMD /c "%NAS_SERVER%\#antivirusLMG\Fsecure\Client\fscs-15.11.1138.msi"
+CMD /c "del /q /f /s %TEMP_DIR%\*"
+CMD /c "del /s /q C:\windows\temp\*"
+powercfg.exe /hibernate off
+powercfg.exe -h off
+DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
+PowerShell.exe -command "Enable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol -NoRestart"
+xcopy "%NAS_SERVER%\Polices\*.*" "%FONT_DIR%\" /Y /E
+
+REM Netskope installation
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\NSClient_108.0.0.1555.msi token=BtQ0lqBIn8uBPThsc5Qf host=addon-lappgroup.de.goskope.com mode=peruserconfig /l*v %PUBLIC%\nscinstall.log"
+
+REM F-Secure installation
+CMD /c "%NAS_SERVER%\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
+pause
+
+REM Addons installation
+xcopy "%NAS_SERVER%\Polices\*.*" "%FONT_DIR%\" /Y /E"
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\ChromeSetup.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\Doko-phone.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\JavaSetup8u351.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\Firefox Setup 112.0.1.exe"
+pause
+msiexec.exe /i "%NAS_SERVER%\#applicationsDIVERS\vlc-3.0.18-win64.msi"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\Advanced_IP_Scanner_2.5.4594.1.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\7z2201-x64.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\pdfcreator_27579844948158094.exe"
+pause
+msiexec.exe /i "%NAS_SERVER%\#applicationsDIVERS\Dialog.msi"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\ganttproject-3.1.3100.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\KeePass-2.52-Setup.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\Creative_Cloud_Set-Up.exe.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\rufus-3.14.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\Solid_Edge_Web_Installer_2023.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\VirtualBox-7.0.8-156879-Win.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\Xmind-for-Windows-x64bit-22.11.3656.exe"
+pause
+
+REM VPN installation
+CMD /c "%NAS_SERVER%\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
+pause
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
+pause
+msiexec.exe /i "%NAS_SERVER%\#VPNansSECURITY\E86.50_CheckPointVPN.msi"
+
+REM GPU update
+gpupdate /force
+
+REM Lotus Notes installation
+CMD /c "%NAS_SERVER%\#lotusNOTES\NOTES_CLIENT_9.0.1_WIN_FR.exe"
+pause
+CMD /c "%NAS_SERVER%\#lotusNOTES\notes901FP7_win.exe"
+
+REM Solid Edge installation
+CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_Free2D_2019.exe"
+pause
+CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_DVD_FRENCH_2019.exe"
+pause
+CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_2023_2210.exe"
+
+REM Office 365 installation
+start CMD /K "del /q /f /s %TEMP_DIR%\*"
+start CMD /K "del /s /q C:\windows\temp\*"
 CMD /c DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
 CMD /c DISM /Online /Enable-Feature /All /FeatureName:SMB1Protocol
+CMD /c net use o: \\LMGAPPS01\SEFlex\Program\ /user:\lappmuller\administrateur%Lmg@Olfex$83.com
+CMD /c net use p: \\lmgfile01\data\ /user:\lappmuller\administrateur%Lmg@Olfex$83.com
+CMD /c net use T: \\lmgfile01 /user:\lappmuller\administrateur%Lmg@Olfex$83.com
+CMD /c "%NAS_SERVER%\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
+c:
+cd\
+md O365-for-Admins
+xcopy "%NAS_SERVER%\#Office\O365-for-Admins\*.*" "C:\O365-for-Admins\" /Y /E
+xcopy "%NAS_SERVER%\Polices\*.*" "%FONT_DIR%\" /Y /E
+CMD /c "C:\O365-for-Admins\Install-Office-365-Languages-French-Englisch\Install-O365-Fr-EN.xml"
 
-net use o: \\LMGAPPS01\SEFlex\Program\%administrateur%Lmg@Olfex$83.com
-net use p: \\lmgfile01\%administrateur%Lmg@Olfex$83.com
-net use T: \\lmgfile01 /u:lappmuller\administrateur Lmg@Olfex$83.com
-
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\C062003T.TTF
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\C062006T.TTF
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\C063003T.TTF
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\C063006T.TTF
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\CorporateSTOT-Bol.otf
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\CorporateSTOT-Reg.otf
-
-
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\*.* C:\Windows\Fonts\ /Y /E
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\lebureau\*.* C:\Users%user%\Desktop\liensutiles /Y /E
-Pause
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\NSClient_96.1.1.1019.msi token=BtQ0lqBIn8uBPThsc5Qf host=addon-lappgroup.de.goskope.com mode=peruserconfig /l*v %PUBLIC%\nscinstall.log"
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\#Office\O365-for-Admins\Install_Files\setup.exe" /configure "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\#Office\O365-for-Admins\Install_Files\Install-O365-Fr-EN.xml"
-xcopy \\192.168.100.94\it-lmg\Source\Polices\*.* C:\Windows\Fonts\ /Y /E
-xcopy \\192.168.100.94\it-lmg\Source\lebureau\*.* C:\Users\%user%\Desktop /Y /E
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\ChromeSetup.exe"
-Pause
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\TeamViewer_Setup_x64.exe"
-Pause
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\JavaSetup8u351.exe"
-Pause
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Firefox Setup 112.0.1.exe"
-Pause
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\vlc-3.0.18-win64.msi"
-Pause
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Advanced_IP_Scanner_2.5.4594.1.exe"
-Pause
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\7z2201-x64.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\pdfcreator_27579844948158094.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Dialog.msi"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\ganttproject-3.1.3100.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\KeePass-2.52-Setup.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\readerdc64_fr_l_cra_mdr_install.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\rufus-3.14.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Solid_Edge_Web_Installer_2023.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\VirtualBox-7.0.8-156879-Win.exe"
-Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Xmind-for-Windows-x64bit-22.11.3656.exe"
-
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\*.* C:\Windows\Fonts\ /Y /E
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\lebureau\*.* C:\Users%user%\Desktop\liensutiles /Y /E
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#VPNandSECURITY\E86.50_CheckPointVPN.msi"
-
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#lotusNOTES\NOTES_CLIENT_9.0.1_WIN_FR.exe"
-pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#lotusNOTES\notes901FP7_win.exe"
-pause
-CMD /c "\\192.168.100.94\Source\INSTALL2023\#applicationsDIVERS\2.2.Solid Edge\Guides Solid Edge 2019\Solid_Edge_MSI_MP10.exe"
-pause
+REM Desktop info installation
 c:
 CD \
 MD DESKTOP
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\DESKTOP\*.* C:\DESKTOP /Y /E
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#antivirusLMG\Fsecure\Client\fscs-15.11.1138.msi"
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\Source\INSTALL2023\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
+xcopy "%NAS_SERVER%\#applicationsDIVERS\DESKTOP\*.*" C:\DESKTOP /Y /E
 
-CMD /c "\\lmgsapB1H01\B1_SHF\Client.x64\setup.exe"
-Pause
-CMD /c "\\lmgsapB1H01\B1_SHF\HANA_Client_v2_SPS05\hdbsetup.exe"
+REM BIGFIX installation
+CMD /c "%NAS_SERVER%\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
 
-xcopy \\192.168.100.94\it-lmg\Source\Polices\*.* C:\Windows\Fonts\ /Y /E
-xcopy \\192.168.100.94\it-lmg\Source\lebureau\*.* C:\Users\%user%\Desktop /Y /E
+REM SAP installation
+runas /user:lappmuller\lda "CMD /c DISM /Online /Enable-Feature /FeatureName:NetFx3 /All"
+runas /user:lappmuller\lda "CMD /c DISM /Online /Enable-Feature /All /FeatureName:SMB1Protocol"
+CMD /c "\\192.168.100.145\B1_SHF\Client.x64\setup.exe"
+pause
+CMD /c "\\192.168.100.145\B1_SHF\HANA_Client_v2_SPS05\hdbsetup.exe"
+
+REM Printer setup
 cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.210 -h 192.168.1.210 -o raw -n 9100
 cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.215 -h 192.168.1.215 -o raw -n 9100
 cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.216 -h 192.168.1.216 -o raw -n 9100
 cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.219 -h 192.168.1.216 -o raw -n 9100
 cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.222 -h 192.168.1.216 -o raw -n 9100
 
+REM Grant ADDONS/SAP
 iCACLS "C:\Program Files\sap\SAP Business One\AddOns" /Grant "Tout le monde":F /T 
-goto menu
 
+REM Reboot to reinstall Windows 10
+shutdown /r /o /f /t 00
 
+REM Copy all source files to C:\ITlmg
+c:
+cd \
+MD ITlmg
+xcopy "%NAS_SERVER%\*.*" "C:\ITlmg" /Y /E
 
-:vmware
-echo off
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo .
-echo ============================================================================================================
+REM Serial Windows
+START /wait CMD /c clef_win
+pause
 
+REM IP Analysis
+PING www.google.com
+PATHPING www.google.com
+TRACERT www.google.com
+IPCONFIG /all
+NSLOOKUP www.google.com
+NETSTAT 
+ROUTE PRINT
+pause
 
+REM Reboot directly into BIOS
+shutdown /r /fw /f /t 0
 
-echo ============================================================================================================
-Echo .
-Echo .
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-goto menu
+REM Join domain
+Add-Computer -DomainName lappmuller.local -Credential (Get-Credential) -OUPath "OU=Computers,DC=lappmuller,DC=local" -Restart
 
-
-
-:xxxxx
-echo off
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo .
-echo ============================================================================================================
-echo on
-
-echo off
-echo ============================================================================================================
-Echo .
-Echo .
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-goto menu
-
-
-:exit
-@exit
+echo Installation complete!
+pause
