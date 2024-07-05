@@ -1,6 +1,14 @@
 echo off
+set NAS_SERVER=\\192.168.100.94\it-lmg\Source\INSTALL2023
+set FONT_DIR=C:\Windows\Fonts
+set TEMP_DIR=%temp%
+set LOGON_SERVER=%logonserver%
+set USERNAME=%USERNAME%
+set COMPUTERNAME=%COMPUTERNAME%
+set HOMEPATH=%HOMEPATH%
+set OS=%OS%
 runas /user:lappmuller\administrateur "cmd /c powercfg.exe /hibernate off"
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\#lebureau\*.* C:\user\desktop\user /Y /E
+xcopy NAS_SERVER\#lebureau\*.* C:\user\desktop\user /Y /E
 w32tm /query /status > hours.log
 Echo %logonserver% %USERNAME% avec %COMPUTERNAME% %HOMEPATH% sous:%OS% > pc.log
 pause
@@ -17,7 +25,6 @@ Echo .
 echo .		Choix installation: DAMOTIC.FR +33783765036 LMGSAPB1H01 4000 Mai 2023 V4
 Echo 		%logonserver% %USERNAME% avec %COMPUTERNAME% %HOMEPATH% sous:%OS% 
 echo ############################################################################################################
-echo 	00) Lire la documentation pour l'installation 
 echo 	0) WINDOWS UPDATE OS
 echo 	1) Setup, mapping, SMB1, purge temp,NetFx3
 echo 	2) Netskope, installation depuis NAS 100.94
@@ -46,7 +53,6 @@ echo .		Pour installer un pc avec toutes les options, faire le 99
 Echo .
 echo ############################################################################################################
 set /p op=Choix : 
-if "%op%"=="00" goto documentation
 if "%op%"=="0" goto update
 if "%op%"=="1" goto setup
 if "%op%"=="2" goto NETSKOPE
@@ -73,21 +79,6 @@ echo Quelle option:
 goto menu
 
 
-:documentation
-echo off 
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\      Documentation    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ok
-Echo .
-Echo .
-Echo .
-echo .              00) Lecture de la documentation
-Echo . 
-Echo . 
-Echo . 
-@echo off
-explorer https://www.overleaf.com/project/665d8b689844da415cc4ab44
-COLOR fc
-goto menu
-
 :update
 echo off
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ok
@@ -113,7 +104,7 @@ Echo .
 Echo .
 echo =================================    FIN.  =================================================================
 
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#antivirusLMG\Fsecure\Client\fscs-15.11.1138.msi"
+CMD /c "NAS_SERVER\#antivirusLMG\Fsecure\Client\fscs-15.11.1138.msi"
 Pause
 
 CMD /K "del /q /f /s %temp%\*"
@@ -126,7 +117,7 @@ DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
 
 PowerShell.exe -command "Enable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol -NoRestart"
 
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\*.* C:\Windows\Fonts\ /Y /E
+xcopy NAS_SERVER\Polices\*.* C:\Windows\Fonts\ /Y /E
 
 echo ============================================================================================================
 Echo .
@@ -160,7 +151,7 @@ Echo .		c) finally, without user authentication, it is almost impossible to get 
 Echo .
 echo ============================================================================================================
 
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\NSClient_108.0.0.1555.msi token=BtQ0lqBIn8uBPThsc5Qf host=addon-lappgroup.de.goskope.com mode=peruserconfig /l*v %PUBLIC%\nscinstall.log"
+CMD /c "NAS_SERVER\#applicationsDIVERS\NSClient_108.0.0.1555.msi token=BtQ0lqBIn8uBPThsc5Qf host=addon-lappgroup.de.goskope.com mode=peruserconfig /l*v %PUBLIC%\nscinstall.log"
 
 echo ============================================================================================================
 Echo .
@@ -181,9 +172,9 @@ echo .		Vous avez lancé 3) FSECURE, installation depuis NAS 100.94             
 Echo .
 Echo .
 echo ============================================================================================================
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
+CMD /c "NAS_SERVER\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
 pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
 pause
 echo ============================================================================================================
 REM echo Vous avez lancé 10															                    REM Why 10 ?
@@ -202,46 +193,46 @@ Echo .
 Echo .
 echo ============================================================================================================
 Echo on
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\*.* C:\Windows\Fonts\ /Y /E
+xcopy NAS_SERVER\Polices\*.* C:\Windows\Fonts\ /Y /E
 
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\ChromeSetup.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\ChromeSetup.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Doko-phone.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\Doko-phone.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\JavaSetup8u351.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\JavaSetup8u351.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Firefox Setup 112.0.1.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\Firefox Setup 112.0.1.exe"
 Pause
-msiexec.exe /i "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\vlc-3.0.18-win64.msi"
+msiexec.exe /i "NAS_SERVER\#applicationsDIVERS\vlc-3.0.18-win64.msi"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Advanced_IP_Scanner_2.5.4594.1.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\Advanced_IP_Scanner_2.5.4594.1.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\7z2201-x64.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\7z2201-x64.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\pdfcreator_27579844948158094.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\pdfcreator_27579844948158094.exe"
 Pause
-msiexec.exe /i "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Dialog.msi"
+msiexec.exe /i "NAS_SERVER\#applicationsDIVERS\Dialog.msi"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\ganttproject-3.1.3100.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\ganttproject-3.1.3100.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\KeePass-2.52-Setup.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\KeePass-2.52-Setup.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Creative_Cloud_Set-Up.exe.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\Creative_Cloud_Set-Up.exe.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\rufus-3.14.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\rufus-3.14.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Solid_Edge_Web_Installer_2023.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\Solid_Edge_Web_Installer_2023.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\VirtualBox-7.0.8-156879-Win.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\VirtualBox-7.0.8-156879-Win.exe"
 Pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\Xmind-for-Windows-x64bit-22.11.3656.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\Xmind-for-Windows-x64bit-22.11.3656.exe"
 
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\*.* C:\Windows\Fonts\ /Y /E
+xcopy NAS_SERVER\Polices\*.* C:\Windows\Fonts\ /Y /E
 
 echo ============================================================================================================
 Echo .
@@ -263,11 +254,11 @@ echo .		Vous avez lancé 5) VPN, installation depuis NAS 100.94
 Echo .
 Echo .
 echo ============================================================================================================
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
+CMD /c "NAS_SERVER\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
 pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
 pause
-msiexec.exe /i "\\192.168.100.94\it-lmg\Source\INSTALL2023\#VPNansSECURITY\E86.50_CheckPointVPN.msi"
+msiexec.exe /i "NAS_SERVER\#VPNansSECURITY\E86.50_CheckPointVPN.msi"
 echo ============================================================================================================
 Echo .
 Echo .
@@ -305,9 +296,9 @@ Echo .
 Echo .
 echo ============================================================================================================
 echo on
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#lotusNOTES\NOTES_CLIENT_9.0.1_WIN_FR.exe"
+CMD /c "NAS_SERVER\#lotusNOTES\NOTES_CLIENT_9.0.1_WIN_FR.exe"
 pause
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#lotusNOTES\notes901FP7_win.exe"
+CMD /c "NAS_SERVER\#lotusNOTES\notes901FP7_win.exe"
 Echo off																                                    REM Mettre ending 
 goto menu
 
@@ -339,7 +330,7 @@ echo ===========================================================================
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 echo .		Vous avez lancé 8) Solid Edge version 2D gratuite pour tout le monde 
 echo ============================================================================================================
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#solidEDGE\Solid_Edge_Free2D_2019.exe"
+CMD /c "NAS_SERVER\#solidEDGE\Solid_Edge_Free2D_2019.exe"
 echo off
 
 :sedge3d
@@ -348,7 +339,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 echo .		Vous avez lancé 8) Solid Edge version 3D sous licence LAPPMULLER
 echo ============================================================================================================
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#solidEDGE\Solid_Edge_DVD_FRENCH_2019.exe"
+CMD /c "NAS_SERVER\#solidEDGE\Solid_Edge_DVD_FRENCH_2019.exe"
 echo off 
 
 :segde3s
@@ -357,7 +348,7 @@ COLOR fc
 echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 echo .		Vous avez lancé 8) Solid Edge version Simulation
 echo ============================================================================================================
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#solidEDGE\Solid_Edge_2023_2210.exe"
+CMD /c "NAS_SERVER\#solidEDGE\Solid_Edge_2023_2210.exe"
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 Echo off
 goto menu
@@ -406,17 +397,17 @@ CMD /c net use o: \\LMGAPPS01\SEFlex\Program\ /user:\lappmuller\administrateur%L
 CMD /c net use p: \\lmgfile01\data\ /user:\lappmuller\administrateur%Lmg@Olfex$83.com
 CMD /c net use T: \\lmgfile01 /user:\lappmuller\administrateur%Lmg@Olfex$83.com
 
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
+CMD /c "NAS_SERVER\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
+CMD /c "NAS_SERVER\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
 
 c:
 cd\
 md O365-for-Admins
 
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\#Office\O365-for-Admins\*.* c:\O365-for-Admins\ /Y /E
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\*.* C:\Windows\Fonts\ /Y /E
+xcopy NAS_SERVER\#Office\O365-for-Admins\*.* c:\O365-for-Admins\ /Y /E
+xcopy NAS_SERVER\Polices\*.* C:\Windows\Fonts\ /Y /E
 
-echo xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\#lebureau\*.* C:\Users\%user%\Desktop /Y /E
+echo xcopy NAS_SERVER\#lebureau\*.* C:\Users\%user%\Desktop /Y /E
 
 CMD /c "C:\O365-for-Admins\Install-Office-365-Languages-French-Englisch\Install-O365-Fr-EN.xml"
 
@@ -444,7 +435,7 @@ echo ===========================================================================
 c:
 CD \
 MD DESKTOP
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\#applicationsDIVERS\DESKTOP\*.* C:\DESKTOP /Y /E
+xcopy NAS_SERVER\#applicationsDIVERS\DESKTOP\*.* C:\DESKTOP /Y /E
 echo ============================================================================================================
 Echo .
 Echo .
@@ -466,7 +457,7 @@ echo .		Vous avez lancé 11) BIGFIX, installation depuis NAS 100.94								REM M
 Echo .
 Echo .
 echo ============================================================================================================
-CMD /c "\\192.168.100.94\it-lmg\Source\INSTALL2023\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
+CMD /c "NAS_SERVER\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
 echo ============================================================================================================
 echo .		Vous avez lancé 11)  BIGFIX, installation depuis NAS 100.94								REM Modif
 echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
@@ -517,12 +508,12 @@ cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_19
 cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.219 -h 192.168.1.216 -o raw -n 9100
 cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.222 -h 192.168.1.216 -o raw -n 9100
 
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\C062003T.TTF
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\C062006T.TTF
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\C063003T.TTF
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\C063006T.TTF
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\CorporateSTOT-Bol.otf
-cmd /c \\192.168.100.94\it-lmg\Source\INSTALL2023\Polices\CorporateSTOT-Reg.otf
+cmd /c NAS_SERVER\Polices\C062003T.TTF
+cmd /c NAS_SERVER\Polices\C062006T.TTF
+cmd /c NAS_SERVER\Polices\C063003T.TTF
+cmd /c NAS_SERVER\Polices\C063006T.TTF
+cmd /c NAS_SERVER\Polices\CorporateSTOT-Bol.otf
+cmd /c NAS_SERVER\Polices\CorporateSTOT-Reg.otf
 
 echo ============================================================================================================
 echo . 		Vous avez lancé 13) Imprimantes 											                                REM Modif
@@ -577,7 +568,7 @@ echo ////////////////////////////////    FIN.  /////////////////////////////////
 c:
 cd \
 MD ITlmg
-xcopy \\192.168.100.94\it-lmg\Source\INSTALL2023\*.* C:\ITlmg /Y /E
+xcopy NAS_SERVER\*.* C:\ITlmg /Y /E
 goto menu
 
 
