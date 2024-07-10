@@ -48,8 +48,6 @@ CMD /c "%NAS_SERVER%\#applicationsDIVERS\ChromeSetup.exe"
 pause
 CMD /c "%NAS_SERVER%\#applicationsDIVERS\Doko-phone.exe"
 pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
-pause
 CMD /c "%NAS_SERVER%\#applicationsDIVERS\JavaSetup8u351.exe"
 pause
 CMD /c "%NAS_SERVER%\#applicationsDIVERS\Firefox Setup 112.0.1.exe"
@@ -64,17 +62,9 @@ CMD /c "%NAS_SERVER%\#applicationsDIVERS\pdfcreator_27579844948158094.exe"
 pause
 msiexec.exe /i "%NAS_SERVER%\#applicationsDIVERS\Dialog.msi"
 pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\ganttproject-3.1.3100.exe"
-pause
 CMD /c "%NAS_SERVER%\#applicationsDIVERS\KeePass-2.52-Setup.exe"
 pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"
-pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\Creative_Cloud_Set-Up.exe.exe"
-pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\rufus-3.14.exe"
-pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\Solid_Edge_Web_Installer_2023.exe"
+CMD /c "%NAS_SERVER%\#applicationsDIVERS\#BIGIFX\BES-10.0.7.52\Client\Client-10.0.7.52.exe"F
 pause
 CMD /c "%NAS_SERVER%\#applicationsDIVERS\VirtualBox-7.0.8-156879-Win.exe"
 pause
@@ -82,10 +72,6 @@ CMD /c "%NAS_SERVER%\#applicationsDIVERS\Xmind-for-Windows-x64bit-22.11.3656.exe
 pause
 
 REM VPN installation
-CMD /c "%NAS_SERVER%\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
-pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
-pause
 msiexec.exe /i "%NAS_SERVER%\#VPNansSECURITY\E86.50_CheckPointVPN.msi"
 
 REM GPU update
@@ -112,7 +98,6 @@ CMD /c net use o: \\LMGAPPS01\SEFlex\Program\ /user:\lappmuller\administrateur%L
 CMD /c net use p: \\lmgfile01\data\ /user:\lappmuller\administrateur%Lmg@Olfex$83.com
 CMD /c net use T: \\lmgfile01 /user:\lappmuller\administrateur%Lmg@Olfex$83.com
 CMD /c "%NAS_SERVER%\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
 c:
 cd\
 md O365-for-Admins
