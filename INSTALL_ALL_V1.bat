@@ -82,13 +82,6 @@ CMD /c "%NAS_SERVER%\#lotusNOTES\NOTES_CLIENT_9.0.1_WIN_FR.exe"
 pause
 CMD /c "%NAS_SERVER%\#lotusNOTES\notes901FP7_win.exe"
 
-REM Solid Edge installation
-CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_Free2D_2019.exe"
-pause
-CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_DVD_FRENCH_2019.exe"
-pause
-CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_2023_2210.exe"
-
 REM Office 365 installation
 start CMD /K "del /q /f /s %TEMP_DIR%\*"
 start CMD /K "del /s /q C:\windows\temp\*"
