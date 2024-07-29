@@ -72,7 +72,7 @@ CMD /c "%NAS_SERVER%\#applicationsDIVERS\Xmind-for-Windows-x64bit-22.11.3656.exe
 pause
 
 REM VPN installation
-msiexec.exe /i "%NAS_SERVER%\#VPNansSECURITY\E86.50_CheckPointVPN.msi"
+msiexec.exe /i "%NAS_SERVER%\#VPNandSECURITY\E86.50_CheckPointVPN.msi"
 
 REM GPU update
 gpupdate /force

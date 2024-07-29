@@ -258,7 +258,7 @@ CMD /c "NAS_SERVER\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
 pause
 CMD /c "NAS_SERVER\#applicationsDIVERS\TeamViewer_Host_Setup.exe"
 pause
-msiexec.exe /i "NAS_SERVER\#VPNansSECURITY\E86.50_CheckPointVPN.msi"
+msiexec.exe /i "NAS_SERVER\#VPNandSECURITY\E86.50_CheckPointVPN.msi"
 echo ============================================================================================================
 Echo .
 Echo .
