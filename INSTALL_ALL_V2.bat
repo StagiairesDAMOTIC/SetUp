@@ -1,5 +1,5 @@
 @echo off
-set NAS_SERVER=..\it-lmg\INSTALL2023
+set NAS_SERVER=G:\Administrativ\it-lmg\INSTALL2023
 set FONT_DIR=C:\Windows\Fonts
 set TEMP_DIR=%temp%
 set LOGON_SERVER=%logonserver%
