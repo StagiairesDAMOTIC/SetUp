@@ -9,7 +9,7 @@ set HOMEPATH=%HOMEPATH%
 set OS=%OS%
 
 REM Disable hibernation
-runas /user:lappdomain\luda1-admin "cmd /c powercfg.exe /hibernate off"
+runas /user:lappdomain\admin.damotic "cmd /c powercfg.exe /hibernate off"
 
 REM Copy desktop files
 xcopy "%NAS_SERVER%\#lebureau\*.*" "C:\Users\%USERNAME%\Desktop" /Y /E

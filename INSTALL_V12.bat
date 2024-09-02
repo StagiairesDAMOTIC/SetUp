@@ -7,7 +7,7 @@ set USERNAME=%USERNAME%
 set COMPUTERNAME=%COMPUTERNAME%
 set HOMEPATH=%HOMEPATH%
 set OS=%OS%
-runas /user:lappdomain\luda1-admin "cmd /c powercfg.exe /hibernate off"
+runas /user:lappdomain\admin.damotic "cmd /c powercfg.exe /hibernate off"
 xcopy %NAS_SERVER%\#lebureau\*.* C:\user\desktop\user /Y /E
 w32tm /query /status > hours.log
 Echo LOGON_SERVER USERNAME avec COMPUTERNAME HOMEPATH sous:OS > pc.log
