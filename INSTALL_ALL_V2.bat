@@ -87,9 +87,9 @@ start CMD /K "del /q /f /s %TEMP_DIR%\*"
 start CMD /K "del /s /q C:\windows\temp\*"
 CMD /c DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
 CMD /c DISM /Online /Enable-Feature /All /FeatureName:SMB1Protocol
-CMD /c net use o: \\LMGAPPS01\SEFlex\Program\ /user:\lappmuller\administrateur%Lmg@Olfex$83.com
-CMD /c net use p: \\lmgfile01\data\ /user:\lappmuller\administrateur%Lmg@Olfex$83.com
-CMD /c net use T: \\lmgfile01 /user:\lappmuller\administrateur%Lmg@Olfex$83.com
+CMD /c net use o: \\fr-gr-app03\SEFlex\Program\ /user:\lappdomain\admin.damotic
+CMD /c net use p: \\fr-gr-fs01\Groups$\ /user:\lappdomain\admin.damotic
+CMD /c net use T: \\fr-gr-fs01 /user:\lappdomain\admin.damotic
 CMD /c "%NAS_SERVER%\#antivirusLMG\Fsecure\Client\F-SecureNetworkInstaller-AV.exe"
 c:
 cd\
