@@ -88,8 +88,6 @@ CMD /c "%NAS_SERVER%\#applicationsDIVERS\JavaSetup8u351.exe" REM projets
 Pause
 CMD /c "%NAS_SERVER%\#applicationsDIVERS\ganttproject-3.1.3100.exe" REM projets
 Pause
-
-Pause
 CMD /c "%NAS_SERVER%\#applicationsDIVERS\Solid_Edge_Web_Installer_2023.exe" REM be indus
 
 
@@ -202,36 +200,6 @@ goto menu
 
 
 
-:prt
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo .
-echo .		Vous avez lancé 13) Imprimantes 											                                REM Modif
-Echo .
-Echo .
-echo ============================================================================================================
-
-cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.210 -h 192.168.1.210 -o raw -n 9100
-cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.215 -h 192.168.1.215 -o raw -n 9100
-cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.216 -h 192.168.1.216 -o raw -n 9100
-cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.219 -h 192.168.1.216 -o raw -n 9100
-cscript C:\Windows\SysWOW64\Printing_Admin_Scripts\fr-FR\prnport.vbs -a -r IP_192.168.100.222 -h 192.168.1.216 -o raw -n 9100
-
-cmd /c %NAS_SERVER%\Polices\C062003T.TTF
-cmd /c %NAS_SERVER%\Polices\C062006T.TTF
-cmd /c %NAS_SERVER%\Polices\C063003T.TTF
-cmd /c %NAS_SERVER%\Polices\C063006T.TTF
-cmd /c %NAS_SERVER%\Polices\CorporateSTOT-Bol.otf
-cmd /c %NAS_SERVER%\Polices\CorporateSTOT-Reg.otf
-
-echo ============================================================================================================
-echo . 		Vous avez lancé 13) Imprimantes 											                                REM Modif
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-goto menu
-
-
 
 :grantaddons
 echo off
@@ -251,85 +219,8 @@ goto menu
 
 
 
-:initOS
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo .
-echo .	Vous avez lancé 15) Reboot reinstal Windows 10											                        REM Modif
-Echo .
-Echo .
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-shutdown /r /o /f /t 00
-goto menu
 
 
-
-:copyall
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo .
-echo .		Vous avez lancé 16) Copie tout le dossier source sur C:\ITlmg				                                REM Modif
-Echo .
-Echo .
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-c:
-cd \
-MD ITlmg
-xcopy %NAS_SERVER%\*.* C:\ITlmg /Y /E
-goto menu
-
-
-
-:serialwin
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo .
-echo .		Vous avez lancé 17) Serial Windows
-Echo .
-Echo .
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-START /wait CMD /c clef_win
-pause
-goto menu
-
-:teamviewer
-::Quick HOST
-::https://get.teamviewer.com/proteo
-::Version Host Mac
-::https://get.teamviewer.com/6j6hueb
-::Full PC
-::https://get.teamviewer.com/6db6ts3
-goto menu
-
-:switching
-echo off
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo . 	96) Analyses IP sur Poste
-Echo .
-echo ============================================================================================================
-Echo on
-PING www.google.com
-PATHPING www.google.com
-TRACERT www.google.com
-IPCONFIG /all
-NSLOOKUP www.google.com
-NETSTAT 
-ROUTE PRINT
-Pause
-echo off
-echo ============================================================================================================
-Echo .
-Echo .	fin 96)  Analyses IP													                                        REM Modif
-Echo .
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-goto menu
 
 
 
@@ -345,23 +236,6 @@ shutdown /r /fw /f /t 0
 goto menu
 
 
-
-:ADDdomain
-echo off
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo . Insertion domaine lappmuller.local
-Echo . computer-name : nom de l’ordinateur à  joindre au domaine
-Echo . /domain : nom du domaine Active Directory
-Echo . /ud : Compte du domaine autorisé à joindre un ordinateur
-Echo . /pd : * permet la saisie du mot de passe ou entrer le mot de passe en clair.
-Echo . /OU : il est possible d’indiquer l’OU
-Echo . /reboot : redémarrage du poste après la jonction
-Echo .
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-Add-Computer lappmuller administrateur@Lmg@Olfex$83.com
-Pause
-goto menu
 
 
 
