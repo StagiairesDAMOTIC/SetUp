@@ -25,12 +25,11 @@ Echo .
 echo .		Choix installation: DAMOTIC.FR +33783765036 LMGSAPB1H01 4000 Juillet 2024 V11
 Echo 		LOGON_SERVER USERNAME avec COMPUTERNAME HOMEPATH sous:OS
 echo ############################################################################################################
-echo 	0) Comptabilité
-echo 	1) Bureau d'étude
-echo 	2) RH
-echo 	3) Supply Chain 
-echo 	4) Connectique
-echo 	5) Atelier
+echo 	1) Atelier
+echo 	2) Bureau d'étude
+echo 	3) Commerce
+echo 	4) Comptabilité 
+echo 	5) Connectique
 echo 	6) Controle
 echo 	7) Industrie
 echo 	8) Logistique
@@ -38,203 +37,31 @@ echo 	9) Maintenance
 echo 	10) Marketing
 echo 	11) Projets
 echo 	12) Qualité
-echo 	13) Commerce
-echo 	14) 
-echo 	15) 
-echo 	16) 
-echo 	17) 
+echo 	13) Ressources Humaines
+echo 	14) Supply Chain
+
 echo ############################################################################################################
 Echo .
-echo .		Pour installer un pc avec toutes les options, faire le 99
+echo .		Choisissez le service pour faire l'installation de cet ordinateur
 Echo .
 echo ############################################################################################################
 set /p op=Choix : 
-if "%op%"=="0" goto atelier
-if "%op%"=="1" goto be
-if "%op%"=="2" goto commerce
-if "%op%"=="3" goto compta
-if "%op%"=="4" goto connectique
-if "%op%"=="5" goto controle
-if "%op%"=="6" goto industrie
-if "%op%"=="7" goto logistique
-if "%op%"=="8" goto maintenance
-if "%op%"=="9" goto marketing
-if "%op%"=="10" goto projets
-if "%op%"=="11" goto qualite
-if "%op%"=="12" goto rh
-if "%op%"=="13" goto supply
+if "%op%"=="1" CALL Service/INSTALL_ALL_atelier.bat
+if "%op%"=="2" CALL Service/INSTALL_ALL_be.bat
+if "%op%"=="3" CALL Service/INSTALL_ALL_commerce.bat
+if "%op%"=="4" CALL Service/INSTALL_ALL_compta.bat
+if "%op%"=="5" CALL Service/INSTALL_ALL_connectique.bat
+if "%op%"=="6" CALL Service/INSTALL_ALL_controle.bat
+if "%op%"=="7" CALL Service/INSTALL_ALL_industrie.bat
+if "%op%"=="8" CALL Service/INSTALL_ALL_logistique.bat
+if "%op%"=="9" CALL Service/INSTALL_ALL_maintenance.bat
+if "%op%"=="10" CALL Service/INSTALL_ALL_marketing.bat
+if "%op%"=="11" CALL Service/INSTALL_ALL_projets.bat
+if "%op%"=="12" CALL Service/INSTALL_ALL_qualite.bat
+if "%op%"=="13" CALL Service/INSTALL_ALL_rh.bat
+if "%op%"=="14" CALL Service/INSTALL_ALL_supply.bat
 echo Quelle option:
 goto menu
-
-
-
-:ADDONS
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ok
-Echo .
-Echo .
-echo .		Vous avez lancé 4) Addons Mai 2023, installation depuis NAS 100.94
-Echo .
-Echo .
-echo ============================================================================================================
-Echo on
-xcopy %NAS_SERVER%\Polices\*.* C:\Windows\Fonts\ /Y /E
-
-
-Pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\JavaSetup8u351.exe" REM projets
-
-Pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\ganttproject-3.1.3100.exe" REM projets
-Pause
-CMD /c "%NAS_SERVER%\#applicationsDIVERS\Solid_Edge_Web_Installer_2023.exe" REM be indus
-
-
-msiexec.exe /i "%NAS_SERVER%\#VPNandSECURITY\E86.50_CheckPointVPN.msi"  REM all
-
-REM be
-:SOLID2D
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ok
-Echo .
-Echo .
-echo .		Vous avez lancé 8) Solid Edge ATTENTION A LA VERSION 								REM mettre un choix en sélection pour better executable
-echo . 					1) Solid Edge version 2D gratuite pour tout le monde 
-echo . 					2) Solid Edge version 3D sous licence LAPPMULLER
-echo . 					3) Solid Edge version Simulation
-Echo .
-Echo .
-set /p se=Choix : 
-if "%se%"=="1" goto sedge2d
-if "%se%"=="2" goto sedge3d
-if "%se%"=="3" goto sedge3s
-echo Quelle option:
-goto menu
-
-
-
-:sedge2d
-echo off
-COLOR fc
-echo ============================================================================================================
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-echo .		Vous avez lancé 8) Solid Edge version 2D gratuite pour tout le monde 
-echo ============================================================================================================
-CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_Free2D_2019.exe"
-echo off
-
-:sedge3d
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-echo .		Vous avez lancé 8) Solid Edge version 3D sous licence LAPPMULLER
-echo ============================================================================================================
-CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_DVD_FRENCH_2019.exe"
-echo off 
-
-:segde3s
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-echo .		Vous avez lancé 8) Solid Edge version Simulation
-echo ============================================================================================================
-CMD /c "%NAS_SERVER%\#solidEDGE\Solid_Edge_2023_2210.exe"
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-Echo off
-goto menu
-
-:Voici vos Liens de téléchargements, ainsi que votre nouveau fichier licence comme convenu au téléphone.
-:DVD 2019 : https://www.dropbox.com/s/kd3vcap5l1l99o7/Solid_Edge_DVD_FRENCH_2019.exe?dl=0
-:MP 7 2019 : https://www.dropbox.com/s/983afkkanggxbuf/Solid_Edge_MSI_MP7.exe?dl=0
-
-:Consignes concernant le serveur :
-:1 – Désinstaller votre gestionnaire de licence ST9
-:2 – Installer le gestionnaire 2019 à l’aide du DVD 
-:3 – Ouvrir LMTOOLS.exe afin de bien utiliser le nouveau fichier de licence.
-
-:Consignes pour les postes Clients :
-
-:1 – en cas de personnalisation de Solid Edge, utilisez « l’assistant des paramètres et des préférences » afin de capturer vos paramètres.
-:2 – Désinstallez l’ancienne version puis installer la nouvelle
-:3 – Installer le dernier maintenance pack.
-:4 – Déployez vos préférences si l’étape 1 a été faite.
-
-:Guillaume TURATI
-:Ingénieur d’application
-:support@digicad.fr
-:Tél. : 04 72 81 66 66
-goto menu
-
-REM be
-
-
-
-
-
-
-:SAP
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ok
-Echo .
-Echo .
-echo .		Vous avez lancé 12) Installation SAP										        	                    REM Modif
-Echo .
-Echo .
-echo ============================================================================================================
-runas /user:lappmuller\lda "CMD /c DISM /Online /Enable-Feature /FeatureName:NetFx3 /All"
-runas /user:lappmuller\lda "CMD /c DISM /Online /Enable-Feature /All /FeatureName:SMB1Protocol"
-
-CMD /c "%NAS_SERVER%\#SAP\B1_SHF\Client.x64\setup.exe"
-Pause
-CMD /c "%NAS_SERVER%\#SAP\B1_SHF\HANA_Client_v2_SPS05\hdbsetup.exe"
-echo ECHO Paramétres SAP LMGSAPB1H01 4000
-pause
-
-echo ============================================================================================================
-echo . 		Vous avez lancé 12) Installation SAP											                            REM Modif
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-goto menu
-
-
-
-
-:grantaddons
-echo off
-COLOR fc
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo .
-echo .		Vous avez lancé 14) Grant lecture all ADDONS/SAP									                        REM Modif
-Echo .
-Echo .
-echo ============================================================================================================
-iCACLS "C:\Program Files\sap\SAP Business One\AddOns" /Grant "Tout le monde":F /T 
-echo ============================================================================================================
-echo . 		Vous avez lancé 14) Grant lecture all ADDONS/SAP									                        REM Modif
-echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
-goto menu
-
-
-
-
-
-
-
-
-:BIOS
-echo off
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Echo .
-Echo . 	97) REBOOT DIRECTEMENT DANS LE BIOS
-Echo .
-echo ============================================================================================================
-echo on
-shutdown /r /fw /f /t 0
-goto menu
-
 
 
 

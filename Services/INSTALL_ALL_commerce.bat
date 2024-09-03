@@ -121,6 +121,43 @@ MD ITlmg
 xcopy "%NAS_SERVER%\#lebureau\*.*" "C:\user\desktop\user" /Y /E
 
 pause
+echo off
+COLOR fc
+echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ok
+Echo .
+Echo .
+echo .		Vous avez lancé 12) Installation SAP										        	                    REM Modif
+Echo .
+Echo .
+echo ============================================================================================================
+runas /user:lappmuller\lda "CMD /c DISM /Online /Enable-Feature /FeatureName:NetFx3 /All"
+runas /user:lappmuller\lda "CMD /c DISM /Online /Enable-Feature /All /FeatureName:SMB1Protocol"
+
+CMD /c "%NAS_SERVER%\#SAP\B1_SHF\Client.x64\setup.exe"
+Pause
+CMD /c "%NAS_SERVER%\#SAP\B1_SHF\HANA_Client_v2_SPS05\hdbsetup.exe"
+echo ECHO Paramétres SAP LMGSAPB1H01 4000
+pause
+
+echo ============================================================================================================
+echo . 		Vous avez lancé 12) Installation SAP											                            REM Modif
+echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
+
+
+
+echo off
+COLOR fc
+echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    START   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+Echo .
+Echo .
+echo .		Vous avez lancé 14) Grant lecture all ADDONS/SAP									                        REM Modif
+Echo .
+Echo .
+echo ============================================================================================================
+iCACLS "C:\Program Files\sap\SAP Business One\AddOns" /Grant "Tout le monde":F /T 
+echo ============================================================================================================
+echo . 		Vous avez lancé 14) Grant lecture all ADDONS/SAP									                        REM Modif
+echo ////////////////////////////////    FIN.  //////////////////////////////////////////////////////////////////
 
 echo Installation complete!
 pause
